@@ -43,14 +43,16 @@ Power::~Power()
 ///@param e exponent
 void Power::SetPower(double k, double e) 
 {
-    if (isnan(k) || isnan(e)) 
-        {
-            cout<<("Invalid parameter")<<endl;  
-        } 
-    else if (k <= 0 && (e <= -1 || e >= 1))
-        {
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Input non valido\n";
+    }
+    if (k <= 0 && (e <= -1 || e >= 1))
+    {
             cout << ("Invalid parameter") << endl;
-        }
+    }
     else 
         {
             k_coeff = k;

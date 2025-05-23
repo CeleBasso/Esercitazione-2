@@ -98,6 +98,13 @@ void Polynomial::SetPolynomial(const double* coefficients, int size) {
 	
 	int i= 0;
 	
+	if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Input non valido\n";
+    }
+	
 	if (size < 1) {
 		ErrorMessage("SetPolynomial: the degree of the Polynomial cannot be negative");
 		exit(-1);
@@ -122,18 +129,18 @@ void Polynomial::SetPolynomial(const double* coefficients, int size) {
 ///	@param in the input
 ///	@return the value of the function
 double Polynomial::GetValue(double in) const {
-        
-		int i;
-		double x = in;
-		double result = 0.0;
-        
-		result = coeff[0];
-		for (i=1; i<=degree; i++) {
-			result += coeff[i]*x;
-			x = in;			/*x^i */ 
-		}
-        
-		return result;
+
+	int i;
+	double x = in;
+	double result = 0.0;
+	
+	result = coeff[0];
+	for (i=1; i<=degree; i++) {
+		result += coeff[i]*x;
+		x = in;			/*x^i */ 
+	}
+	
+	return result;
 }
 
 /// @brief resets the polynomial 

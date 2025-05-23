@@ -52,15 +52,17 @@ void Log::SetLog(double k, double b)
 /// @return the value of the log
 double Log::GetValue(double in) const
 {
-    if (isnan(k_coeff ) || isnan(b_coeff) || b_coeff<=1)
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Input non valido\n";
+        return(-1);
+    }
+    if (b_coeff<=1 || in<=0)
     {
         cout<<"Invalid parameter "<<endl;
         return(-1);
-    }
-    if(isnan(in) || in<=0)
-    {
-        cout<<"Invalid parameter"<<endl;
-        return (-1);
     }
         return k_coeff*log(in)/log(b_coeff); 
     

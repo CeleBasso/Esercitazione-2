@@ -12,6 +12,6 @@
 /// @brief Main function
 int main()
 {
-    ShowMenu();
-    return 0;
+  ShowMenu();
+  return 0;
 }
