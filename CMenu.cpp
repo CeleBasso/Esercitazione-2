@@ -75,13 +75,13 @@ void ShowMenu()
         cout << "Scelta: ";
 
         string input;
-        getline(cin, input);
+        getline(cin >> ws, input);
 
         try
         {
             choice = stoi(input);
         }
-        catch (...)
+        catch (exception &e)
         {
             cout << "Input non valido. Inserisci un numero." << endl;
             continue; 
@@ -231,7 +231,7 @@ void ShowMenu()
             if (ChiediConferma("Confermi l'eliminazione della funzione?"))
             {
                 delete functions[id];
-                functions.erase(functions.begin() + id);
+                functions.erase(functions.begin() +(int)id);
                 cout << "Funzione eliminata.\n";
             }
             else
@@ -243,12 +243,13 @@ void ShowMenu()
 
         /// @brief delete all function
         case 4:
+        {
             for (Function *f : functions)
                 delete f;
             functions.clear();
             cout << "Tutte le funzioni sono state eliminate.\n";
             break;
-
+        }
         /// @brief select a function and solvable with a value
         case 5:
         {
@@ -259,6 +260,14 @@ void ShowMenu()
             size_t id;
             cout << "Inserisci l'ID della funzione da selezionare: ";
             cin >> id;
+
+             if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Input non valido. Inserisci un numero.\n";
+                continue;
+            }
 
             if (id >= functions.size())
             {
@@ -280,10 +289,13 @@ void ShowMenu()
                 cout << "Input non valido. Inserisci un numero.\n";
                 break;
             }
-
-            cout << "Valore della funzione per x = " << x
+            else
+            {
+                 cout << "Valore della funzione per x = " << x
                  << ": " << f->GetValue(x) << "\n";
             break;
+            }
+
         }
 
         case 0:
